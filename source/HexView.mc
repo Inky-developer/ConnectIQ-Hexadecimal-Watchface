@@ -6,10 +6,10 @@ using Toybox.Time;
 
 class HexView extends WatchUi.WatchFace {
 	var width, height;
-	var n = 5;
 	var timeLabel, dateLabel;
 	var font = WatchUi.loadResource(Rez.Fonts.hex);
 	var dirty = false;
+	var spacer = " ";
 
     function initialize() {
         WatchFace.initialize();
@@ -48,7 +48,6 @@ class HexView extends WatchUi.WatchFace {
 	        	:locX => width / 2,
 	        });
     		
-    		var spacer = " ";
     	    var dim = dc.getTextDimensions("FF"+spacer, font);
     	    var t_width = dim[0];
     	    var length = (width / t_width).toNumber();
@@ -81,11 +80,11 @@ class HexView extends WatchUi.WatchFace {
         var clockTime = System.getClockTime();
         var gregorian = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
 		
-		var text = utils.toHex(clockTime.hour) + " " + utils.toHex(clockTime.min);
+		var text = utils.toHex(clockTime.hour) + spacer + utils.toHex(clockTime.min);
 		self.timeLabel.setText(text);
 		self.timeLabel.draw(dc);
 		
-		var date = utils.toHex(gregorian.month) + " " + utils.toHex(gregorian.day);
+		var date = utils.toHex(gregorian.month) + spacer + utils.toHex(gregorian.day);
 		self.dateLabel.setText(date);
 		self.dateLabel.draw(dc);
     }
