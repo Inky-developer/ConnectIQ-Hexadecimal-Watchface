@@ -29,6 +29,7 @@ class HexApp extends Application.AppBase {
     function onSettingsChanged() {
     	self.readSettings();
     	self.view.redraw();
+    	WatchUi.requestUpdate();
     }
     
     function readSettings() {

@@ -21,12 +21,11 @@ class HexView extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	
+    	self.redraw();
     }
     
     function redraw() {
     	self.dirty = true;
-    	WatchUi.requestUpdate();
     }
     
     function onLayout(dc) {
@@ -73,6 +72,7 @@ class HexView extends WatchUi.WatchFace {
     // Update the view
     function onUpdate(dc) {
     	if (self.dirty) {
+    		self.dirty = false;
     		self.onLayout(dc);
     	}
     	
