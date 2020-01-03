@@ -1,0 +1,22 @@
+<strings>
+    <string id="AppName">Hex</string>
+    <string id="AppVersion">1.0.0</string>
+    
+    <string id="colorBackground">Select background color</string>
+    <string id="colorDefault">Select default text color</string>
+    <string id="colorDate">Select date color</string>
+    <string id="colorTime">Select time color</string>
+    
+    <string id="ColorBlack">Black</string>
+    <string id="ColorLtGray">Light Gray</string>
+    <string id="ColorDkGray">Dark Gray</string>
+    <string id="ColorRed">Red</string>
+    <string id="ColorOrange">Orange</string>
+    <string id="ColorYellow">Yellow</string>
+    <string id="ColorGreen">Green</string>
+    <string id="ColorDkGreen">Dark Green</string>
+    <string id="ColorBlue">Blue</string>
+    <string id="ColorDkBlue">Dark Blue</string>
+    <string id="ColorPink">Pink</string>
+    <string id="ColorWhite">White</string>
+</strings>

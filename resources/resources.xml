@@ -1,0 +1,9 @@
+<resources>
+	<properties>
+		<property id="appVersion" type="String" />
+		<property id="colorBackground" type="number">0x000000</property>
+		<property id="colorDefault" type="number">0xFFFFFF</property>
+		<property id="colorDate" type="number">0xFFFFFF</property>
+		<property id="colorTime" type="number">0x00AA00</property>
+	</properties>
+</resources>
