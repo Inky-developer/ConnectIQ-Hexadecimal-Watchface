@@ -8,7 +8,7 @@ class HexView extends WatchUi.WatchFace {
 	var width, height;
 	var timeLabel, dateLabel;
 	var font = WatchUi.loadResource($.displayFont);
-	var dirty = false;
+	var dirty = true;
 	var spacer = " ";
 
     function initialize() {
@@ -29,6 +29,7 @@ class HexView extends WatchUi.WatchFace {
     }
     
     function onLayout(dc) {
+    		dc.clear();
     		dc.setColor(Graphics.COLOR_BLACK, -1);
     		dc.fillRectangle(0, 0, width, height);
     		
@@ -95,6 +96,7 @@ class HexView extends WatchUi.WatchFace {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
+    	self.dirty = true;
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
