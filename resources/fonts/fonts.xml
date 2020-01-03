@@ -1,3 +1,4 @@
 <fonts>
 	<font id="hex" filename="hex.fnt" />
+	<font id="hexLarge" filename="hex_large.fnt" />
 </fonts>

@@ -3,6 +3,7 @@ using Toybox.Graphics;
 using Toybox.WatchUi;
 
 var colors = new utils.ColorScheme();
+var displayFont = Rez.Fonts.hex;
 
 class HexApp extends Application.AppBase {
 	var view;
@@ -38,6 +39,7 @@ class HexApp extends Application.AppBase {
     	colors.set(:text, readKeyInt(app, "colorDefault", Graphics.COLOR_WHITE));
     	colors.set(:date, readKeyInt(app, "colorDate", Graphics.COLOR_WHITE));
     	colors.set(:time, readKeyInt(app, "colorTime", Graphics.COLOR_DK_GREEN));
+    	$.displayFont = app.getProperty("largeFont") == true ? Rez.Fonts.hexLarge : Rez.Fonts.hex;
     }
     
     function readKeyInt(myApp,key,thisDefault) {

@@ -5,5 +5,7 @@
 		<property id="colorDefault" type="number">0xFFFFFF</property>
 		<property id="colorDate" type="number">0xFFFFFF</property>
 		<property id="colorTime" type="number">0x00AA00</property>
+		
+		<property id="largeFont" type="boolean">false</property>
 	</properties>
 </resources>

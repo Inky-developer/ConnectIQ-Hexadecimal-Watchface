@@ -1,11 +1,12 @@
 <strings>
     <string id="AppName">Hex</string>
-    <string id="AppVersion">1.0.0</string>
+    <string id="AppVersion">1.0.4</string>
     
     <string id="colorBackground">Select background color</string>
     <string id="colorDefault">Select default text color</string>
     <string id="colorDate">Select date color</string>
     <string id="colorTime">Select time color</string>
+    <string id="useLargeFont">Use a larger font size</string>
     
     <string id="ColorBlack">Black</string>
     <string id="ColorLtGray">Light Gray</string>

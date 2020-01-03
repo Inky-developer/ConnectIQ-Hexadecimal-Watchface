@@ -7,7 +7,7 @@ using Toybox.Time;
 class HexView extends WatchUi.WatchFace {
 	var width, height;
 	var timeLabel, dateLabel;
-	var font = WatchUi.loadResource(Rez.Fonts.hex);
+	var font = WatchUi.loadResource($.displayFont);
 	var dirty = false;
 	var spacer = " ";
 
@@ -31,6 +31,8 @@ class HexView extends WatchUi.WatchFace {
     function onLayout(dc) {
     		dc.setColor(Graphics.COLOR_BLACK, -1);
     		dc.fillRectangle(0, 0, width, height);
+    		
+    		self.font = WatchUi.loadResource($.displayFont);
     		
     		self.timeLabel = new WatchUi.Text({
 	        	:color => colors.get(:time),
