@@ -10,6 +10,9 @@ class HexView extends WatchUi.WatchFace {
 	var font = WatchUi.loadResource($.displayFont);
 	var dirty = true;
 	var spacer = " ";
+	
+	var lines;
+	var text_height;
 
     function initialize() {
         WatchFace.initialize();
@@ -21,62 +24,64 @@ class HexView extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	self.redraw();
     }
     
-    function redraw() {
-    	self.dirty = true;
-    }
-    
-    function onLayout(dc) {
-    		dc.clear();
-    		dc.setColor(Graphics.COLOR_BLACK, -1);
-    		dc.fillRectangle(0, 0, width, height);
-    		
-    		self.font = WatchUi.loadResource($.displayFont);
-    		
-    		self.timeLabel = new WatchUi.Text({
-	        	:color => colors.get(:time),
-	        	:backgroundColor => colors.get(:bg),
-	        	:font => font,
-	        	:justification => Graphics.TEXT_JUSTIFY_CENTER,
-	        	:locX => width / 2,
-	        });
-	        self.dateLabel = new WatchUi.Text({
-	        	:color => colors.get(:date),
-	        	:backgroundColor => colors.get(:bg),
-	        	:font => font,
-	        	:justification => Graphics.TEXT_JUSTIFY_CENTER,
-	        	:locX => width / 2,
-	        });
-    		
-    	    var dim = dc.getTextDimensions("FF"+spacer, font);
-    	    var t_width = dim[0];
-    	    var length = (width / t_width).toNumber();
-    	    length = length % 2 == 0 ? length : length + 1;
-    	    var t_height = dim[1];
-    	    
-    	    var centerRow = (height / t_height * 0.5).toNumber() * t_height;
-    	    self.timeLabel.setLocation(self.timeLabel.locX, centerRow);
-    	    self.timeLabel.setSize(height, t_width);
-    	    
-    	    self.dateLabel.setLocation(self.dateLabel.locX, centerRow - t_height);
-    	    self.dateLabel.setSize(height, t_width);
-    	        	    
-    	    var centerX = width / 2;
-    	    dc.setColor(colors.get(:text), colors.get(:bg));
-    	    for (var y = 0; y < height; y += t_height) {
-    	    	var line = utils.getHexLine(length, spacer);
-    	    	//System.println(line);
-    	    	dc.drawText(centerX, y, font, line, Graphics.TEXT_JUSTIFY_CENTER);
-    	    }	
+    function updateData(dc) {		
+		self.font = WatchUi.loadResource($.displayFont);
+		
+		self.timeLabel = new WatchUi.Text({
+        	:color => colors.get(:time),
+        	:backgroundColor => colors.get(:bg),
+        	:font => font,
+        	:justification => Graphics.TEXT_JUSTIFY_CENTER,
+        	:locX => width / 2,
+        });
+        self.dateLabel = new WatchUi.Text({
+        	:color => colors.get(:date),
+        	:backgroundColor => colors.get(:bg),
+        	:font => font,
+        	:justification => Graphics.TEXT_JUSTIFY_CENTER,
+        	:locX => width / 2,
+        });
+		
+	    var dim = dc.getTextDimensions("FF"+spacer, font);
+	    var t_width = dim[0];
+	    var length = (width / t_width).toNumber();
+	    length = length % 2 == 0 ? length : length + 1;
+	    var t_height = dim[1];
+	    
+	    var centerRow = (height / t_height * 0.5).toNumber() * t_height;
+	    self.timeLabel.setLocation(self.timeLabel.locX, centerRow);
+	    self.timeLabel.setSize(height, t_width);
+	    
+	    self.dateLabel.setLocation(self.dateLabel.locX, centerRow - t_height);
+	    self.dateLabel.setSize(height, t_width);
+	       
+	    // generate the random hex pairs
+	    var centerX = width / 2;
+	    lines = new [(height / t_height).toNumber() + 1];
+	    for (var i = 0; i < lines.size(); i++) {
+	    	var line = utils.getHexLine(length, spacer);
+	    	lines[i] = line;
+	    }	
+	    self.text_height = t_height;
     }
 
     // Update the view
     function onUpdate(dc) {
+    	WatchFace.onUpdate(dc);
+    	
     	if (self.dirty) {
     		self.dirty = false;
-    		self.onLayout(dc);
+    		self.updateData(dc);
+    	}
+    	
+    	var centerX = self.width / 2;
+    	var i = 0;
+    	dc.setColor(colors.get(:text), colors.get(:bg));
+    	for (var y = 0; y < self.height; y += self.text_height) {
+    		dc.drawText(centerX, y, font, lines[i], Graphics.TEXT_JUSTIFY_CENTER);
+    		i++;
     	}
     	
         // Get and show the current time
@@ -96,7 +101,6 @@ class HexView extends WatchUi.WatchFace {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
-    	self.dirty = true;
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
